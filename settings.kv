@@ -1,0 +1,148 @@
+ScreenManager:
+    SubjectScreen:
+    LoginScreen:
+
+<SubjectScreen>:
+    name:'menu'
+    MDLabel:
+        text:'Enter your today subjects respective codes'
+		font_style:'H4'
+		pos_hint:{'center_y':0.9}
+		halign:'center'
+		theme_text_color:'Custom'
+		text_color:1,0.75,0,1
+	MDLabel:
+        text:'(ICS221/ICS222/ICS223/ICS224/IMA221/IHS221/IHS222/IHS223)'
+		font_style:'H5'
+		pos_hint:{'center_y':0.75}
+		halign:'center'
+		theme_text_color:'Custom'
+		text_color:1,0.75,0,1
+
+	MDTextField:
+	    id: one
+	    hint_text: 'I  period'
+		helper_text: 'put subject code'
+		helper_text_mode: 'on_focus'
+		icon_right: "book"
+		icon_right_color: 1,0.74,0,1
+		pos_hint:{'center_x':0.5,'center_y':0.6}
+		size_hint_x: None
+		width: 250
+		mode: "rectangle"
+		required: True
+
+	MDTextField:
+	    id: two
+	    hint_text: 'II  period'
+		helper_text: 'put subject code'
+		helper_text_mode: 'on_focus'
+		icon_right: "book"
+		icon_right_color: 1,0.74,0,1
+		pos_hint: {'center_x':0.5,'center_y':0.5}
+		size_hint_x: None
+		width: 250
+		mode: "rectangle"
+		required: True
+	MDTextField:
+	    id: three
+	    hint_text: 'III  period'
+		helper_text: 'put subject code'
+		helper_text_mode: 'on_focus'
+		icon_right: "book"
+		icon_right_color: 1,0.74,0,1
+		pos_hint: {'center_x':0.5,'center_y':0.4}
+		size_hint_x: None
+		width: 250
+		mode: "rectangle"
+		required: True
+
+	MDTextField:
+	    id: four
+	    hint_text: 'IV period'
+		helper_text: 'put subject code' 
+		helper_text_mode: 'on_focus'
+		icon_right: "book"
+		icon_right_color: 1,0.7,0,1
+		pos_hint: {'center_x':0.5,'center_y':0.3}
+		size_hint_x: None
+		width: 250
+		mode: "rectangle"
+		required: True
+
+	MDRectangleFlatIconButton:
+	    text: "Submit"
+	    icon: "account-edit"
+	    pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+	    on_press: app.submit(one,two,three,four)
+	    on_release: 
+	    	if(one.text!='' and two.text!='' and three.text!='' and four.text!=''):root.manager.current = 'LoginScreen'
+	    	# root.manager.transition.direction='left'
+	    	else:root.manager.current='menu'
+	    
+	    
+
+<LoginScreen>:
+    name: 'LoginScreen'
+
+    MDLabel:
+		text:'Login'
+		font_style:'H2'
+		pos_hint:{'center_y':0.9}
+		halign:'center'
+		theme_text_color:'Custom'
+		text_color:1,0.75,0,1
+	MDTextField:
+		# mode:'rectangle'
+		id:usr
+		hint_text:'Username'
+		icon_right: "email-outline"
+		line_color_focus: 0,1,1,1
+		icon_right_color: 1,0.75,0,1
+		helper_text:'must be your LMS id'
+		helper_text_mode:'on_focus'
+		pos_hint:{'center_x':0.5,'center_y':0.6}
+		color_active:1,0,1,1
+		size_hint_x:None
+		width:250
+		required:True
+	MDTextField:
+		id:pwd
+		hint_text:'Password'
+		password:True
+		helper_text:'enter correct password'
+		helper_text_mode:'on_focus'
+		icon_right: "pencil-ruler"
+		line_color_focus: 0,1,1,1
+		icon_right_color: 1,0.75,0,1
+		pos_hint:{'center_x':0.5,'center_y':0.5}
+		size_hint_x:None
+		width:250
+		required:True
+	MDRectangleFlatIconButton:
+		text:'Submit'
+		icon:'login'
+		# md_bg_color:1,0.75,0,1
+		pos_hint:{'center_x':0.5,'center_y':0.35}
+		on_press:app.login(usr,pwd)
+	MDLabel:
+		text:''
+		id:result
+		color:1,1,1,1
+		pos_hint:{'center_y':0.42}
+		halign:'center'
+
+	MDRectangleFlatIconButton:
+	    text: "Back"
+	    icon: "account-edit"
+	    pos_hint: {'center_x': 0.5, 'center_y': 0.28}
+	    on_press: 
+	    	root.manager.current = 'menu'
+	    	root.manager.transition.direction='right'
+	    
+	MDRectangleFlatIconButton:
+	    text: "Exit"
+	    icon: "clock-in"
+	    pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+	    on_press: app.stop()
+	    
